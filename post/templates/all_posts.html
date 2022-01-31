@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+<!-- <h1>welcome to our blog</h1>
+{% for post in all_posts %}
+<a href="{% url 'blog:post' post.pk %}">
+    <h3>{{post.title}}</h3>
+</a>
+{% endfor %}
+<button><a href="{% url 'blog:createPost' %}">add post</a> </button> -->
+{% block body %}
+<div class="jumbotron banner">
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'blog:createPost' %}" role="button">Add new post</a>
+    </p>
+</div>
+{% for post in all_posts %}
+<div class="card">
+    {% if post.img %}
+    <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{post.content| safe | truncatewords:20}}</p>
+        <a href="{% url 'blog:post' post.pk %}" class="btn btn-primary">know more</a>
+    </div>
+</div>
+{% endfor %}
+{% endblock body %}
